@@ -1,0 +1,163 @@
+Table UC_Main [headercolor: #175e7a] {
+	id int [ pk, unique ]
+	UC_code nvarchar(50)
+	title nvarchar(255)
+	description text
+	owner nvarchar(100)
+	status nvarchar(50)
+	created_on datetime
+}
+
+Table Solutions [headercolor: #d9f505] {
+	id int [ pk, unique ]
+	id_UC int
+	version nvarchar(20)
+	parent_solution_id int
+	is_active bit
+	change_reason nvarchar(255)
+	change_details text
+	changed_by nvarchar(100)
+	changed_on datetime
+	supplier_id int [ note: 'FK to Suppliers if exists' ]
+	notes text
+}
+
+Table Project_Work_Log [headercolor: #f50a0a] {
+	id int [ pk, unique ]
+	id_solution int
+	event_date datetime
+	milestone nvarchar(255)
+	phase nvarchar(100)
+	description text
+	author nvarchar(100)
+	status nvarchar(50)
+	notes text
+}
+
+Table Technical_Change_Log [headercolor: #175e7a] {
+	id int [ pk, unique ]
+	id_solution int
+	change_date datetime
+	change_type nvarchar(50)
+	affected_component nvarchar(100)
+	description text
+	changed_by nvarchar(100)
+	impact nvarchar(255)
+	notes text
+}
+
+Table Cameras [headercolor: #13fa02] {
+	id int [ pk, unique ]
+	id_solution int
+	manufacturer nvarchar(255)
+	model nvarchar(255)
+	type nvarchar(100)
+	interface nvarchar(50)
+	resolution decimal(10,2)
+	frame_rate decimal(10,2)
+	lens_mount_type nvarchar(50)
+	ip_address nvarchar(50)
+	notes text
+}
+
+Table Lenses [headercolor: #21f205] {
+	id int [ pk, unique ]
+	id_camera int
+	manufacturer nvarchar(255)
+	model nvarchar(255)
+	focal_length decimal(10,2)
+	aperture nvarchar(10)
+	zoom_type nvarchar(50)
+	notes text
+}
+
+Table Camera_ROI_Map [headercolor: #4ffc0a] {
+	id_camera int [ pk ]
+	id_roi int [ pk ]
+	role nvarchar(50)
+	is_active bit
+	notes text
+
+	indexes {
+		(id_camera, id_roi) [ name: 'Camera_ROI_Map_index_0' ]
+	}
+}
+
+Table ROIs [headercolor: #2e942b] {
+	id int [ pk, unique ]
+	id_solution int
+	name nvarchar(255)
+	description text
+	target_feature nvarchar(255)
+	criteria nvarchar(255)
+	tolerance decimal(10,2)
+	is_active bit
+	notes text
+}
+
+Table Car_Models [headercolor: #090deb] {
+	id int [ pk, unique ]
+	market_name nvarchar(100)
+	nomenclature nvarchar(100)
+	platform nvarchar(100)
+	notes text
+}
+
+Table ROI_CarModel_Map [headercolor: #01877e] {
+	id_roi int [ pk ]
+	id_car_model int [ pk ]
+	roi_label_override nvarchar(255)
+	tolerance_override decimal(10,2)
+	x_offset decimal(10,2)
+	y_offset decimal(10,2)
+	roi_enabled bit
+	notes text
+
+	indexes {
+		(id_roi, id_car_model) [ name: 'ROI_CarModel_Map_index_0' ]
+	}
+}
+
+Ref fk_UC_Main_id_Solutions {
+	UC_Main.id < Solutions.id_UC [ delete: no action, update: no action ]
+}
+
+Ref fk_Solutions_id_Solutions {
+	Solutions.id < Solutions.parent_solution_id [ delete: no action, update: no action ]
+}
+
+Ref fk_Solutions_id_Cameras {
+	Solutions.id < Cameras.id_solution [ delete: no action, update: no action ]
+}
+
+Ref fk_Cameras_id_Lenses {
+	Cameras.id < Lenses.id_camera [ delete: no action, update: no action ]
+}
+
+Ref fk_Solutions_id_ROIs {
+	Solutions.id < ROIs.id_solution [ delete: no action, update: no action ]
+}
+
+Ref fk_Cameras_id_Camera_ROI_Map {
+	Cameras.id < Camera_ROI_Map.id_camera [ delete: no action, update: no action ]
+}
+
+Ref fk_ROIs_id_Camera_ROI_Map {
+	ROIs.id < Camera_ROI_Map.id_roi [ delete: no action, update: no action ]
+}
+
+Ref fk_ROIs_id_ROI_CarModel_Map {
+	ROIs.id < ROI_CarModel_Map.id_roi [ delete: no action, update: no action ]
+}
+
+Ref fk_Car_Models_id_ROI_CarModel_Map {
+	Car_Models.id < ROI_CarModel_Map.id_car_model [ delete: no action, update: no action ]
+}
+
+Ref fk_Solutions_id_Project_Work_Log {
+	Solutions.id < Project_Work_Log.id_solution [ delete: no action, update: no action ]
+}
+
+Ref fk_Solutions_id_Technical_Change_Log {
+	Solutions.id < Technical_Change_Log.id_solution [ delete: no action, update: no action ]
+}
