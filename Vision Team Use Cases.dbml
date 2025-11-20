@@ -71,7 +71,7 @@ Table Lenses [headercolor: #21f205] {
 	notes text
 }
 
-Table Camera_ROI_Map [headercolor: #4ffc0a] {
+Table Camera_ROI_Map [headercolor: #d8fc0a] {
 	id_camera integer [ pk ]
 	id_roi integer [ pk ]
 	role nvarchar(50)
@@ -145,6 +145,22 @@ Table List_Types_ROI [headercolor: #e4ebed] {
 	type nvarchar(255)
 }
 
+Table Project_Milestones [headercolor: #f20511] {
+	id integer [ pk, increment, not null, unique ]
+	project_work_id integer
+	name nvarchar(255)
+	description nvarchar(255)
+	status nvarchar(255)
+}
+
+Table Experts_Training [headercolor: #175e7a] {
+	id integer [ pk, increment, not null, unique ]
+	name nvarchar(255) [ note: 'Name of the expert.' ]
+	solution_id integer
+	date date [ note: 'Date of the training (month and year of its start).' ]
+	status nvarchar(255) [ note: 'Current status of the trainee (e.g., active, completed).' ]
+}
+
 Ref fk_UC_Main_id_Solutions {
 	UC_Main.id < Solutions.id_UC [ delete: no action, update: no action ]
 }
@@ -207,4 +223,12 @@ Ref fk_Suppliers_id_Cameras {
 
 Ref fk_Suppliers_id_Lenses {
 	Suppliers.id < Lenses.id_manufacturer [ delete: no action, update: no action ]
+}
+
+Ref fk_Project_Milestones_project_work_id_Project_Work_Log {
+	Project_Milestones.project_work_id > Project_Work_Log.id [ delete: no action, update: no action ]
+}
+
+Ref fk_Experts_Training_id_Solutions {
+	Experts_Training.id - Solutions.id [ delete: no action, update: no action ]
 }
