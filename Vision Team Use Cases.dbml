@@ -1,0 +1,200 @@
+Table UC_Main [headercolor: #175e7a] {
+	id integer [ pk, unique ]
+	UC_code nvarchar(50)
+	title nvarchar(255)
+	description text
+	owner nvarchar(100)
+	status nvarchar(50)
+	created_on datetime
+}
+
+Table Solutions [headercolor: #d9f505] {
+	id integer [ pk, unique ]
+	id_UC integer
+	version nvarchar(20)
+	parent_solution_id integer
+	is_active bit
+	change_reason nvarchar(255)
+	change_details text
+	changed_by nvarchar(100)
+	changed_on datetime
+	id_supplier integer [ note: 'FK to Suppliers if exists' ]
+	notes text
+}
+
+Table Project_Work_Log [headercolor: #f50a0a] {
+	id integer [ pk, unique ]
+	id_solution integer
+	event_date datetime
+	milestone nvarchar(255)
+	phase nvarchar(100)
+	description text
+	author nvarchar(100)
+	status nvarchar(50)
+	notes text
+}
+
+Table Technical_Change_Log [headercolor: #175e7a] {
+	id integer [ pk, unique ]
+	id_solution integer
+	change_date datetime
+	change_type nvarchar(50)
+	affected_component nvarchar(100)
+	description text
+	changed_by nvarchar(100)
+	impact nvarchar(255)
+	notes text
+}
+
+Table Cameras [headercolor: #13fa02] {
+	id integer [ pk, unique ]
+	id_solution integer
+	manufacturer nvarchar(255)
+	model nvarchar(255)
+	type nvarchar(100)
+	interface nvarchar(50)
+	resolution decimal(10,2)
+	frame_rate decimal(10,2)
+	lens_mount_type nvarchar(50)
+	ip_address nvarchar(50)
+	notes text
+}
+
+Table Lenses [headercolor: #21f205] {
+	id integer [ pk, unique ]
+	id_camera integer
+	manufacturer nvarchar(255)
+	model nvarchar(255)
+	focal_length decimal(10,2)
+	aperture nvarchar(10)
+	zoom_type nvarchar(50)
+	notes text
+}
+
+Table Camera_ROI_Map [headercolor: #4ffc0a] {
+	id_camera integer [ pk ]
+	id_roi integer [ pk ]
+	role nvarchar(50)
+	is_active bit
+	notes text
+
+	indexes {
+		(id_camera, id_roi) [ name: 'Camera_ROI_Map_index_0' ]
+	}
+}
+
+Table ROIs [headercolor: #ed7207] {
+	id integer [ pk, unique ]
+	id_solution integer
+	name nvarchar(255)
+	description text
+	target_feature nvarchar(255)
+	criteria nvarchar(255)
+	tolerance decimal(10,2)
+	is_active bit
+	notes text
+}
+
+Table Car_Models [headercolor: #000003] {
+	id integer [ pk, unique ]
+	market_name nvarchar(100)
+	nomenclature nvarchar(100)
+	platform nvarchar(100)
+	notes text
+}
+
+Table ROI_CarModel_Map [headercolor: #01877e] {
+	id_roi integer [ pk ]
+	id_car_model integer [ pk ]
+	roi_label_override nvarchar(255)
+	tolerance_override decimal(10,2)
+	x_offset decimal(10,2)
+	y_offset decimal(10,2)
+	roi_enabled bit
+	notes text
+
+	indexes {
+		(id_roi, id_car_model) [ name: 'ROI_CarModel_Map_index_0' ]
+	}
+}
+
+Table Suppliers [headercolor: #0a0af2] {
+	id integer [ pk, increment, not null, unique ]
+	name nvarchar(255)
+	website nvarchar(255)
+}
+
+Table Contacts_External [headercolor: #0707ed] {
+	id integer [ pk, increment, not null, unique ]
+	id_supplier integer
+	first_name nvarchar(255)
+	middle_name nvarchar(255)
+	last_name nvarchar(255)
+	job_position nvarchar(255)
+	note text(65535)
+	email_address nvarchar(255)
+	phone_work nvarchar(255)
+	phone_other nvarchar(255)
+}
+
+Table List_Types_ROI [headercolor: #e4ebed] {
+	id integer [ pk, increment, not null, unique ]
+	id_roi integer
+	type nvarchar(255)
+}
+
+Ref fk_UC_Main_id_Solutions {
+	UC_Main.id < Solutions.id_UC [ delete: no action, update: no action ]
+}
+
+Ref fk_Solutions_id_Solutions {
+	Solutions.id < Solutions.parent_solution_id [ delete: no action, update: no action ]
+}
+
+Ref fk_Solutions_id_Cameras {
+	Solutions.id < Cameras.id_solution [ delete: no action, update: no action ]
+}
+
+Ref fk_Cameras_id_Lenses {
+	Cameras.id < Lenses.id_camera [ delete: no action, update: no action ]
+}
+
+Ref fk_Solutions_id_ROIs {
+	Solutions.id < ROIs.id_solution [ delete: no action, update: no action ]
+}
+
+Ref fk_Cameras_id_Camera_ROI_Map {
+	Cameras.id < Camera_ROI_Map.id_camera [ delete: no action, update: no action ]
+}
+
+Ref fk_ROIs_id_Camera_ROI_Map {
+	ROIs.id < Camera_ROI_Map.id_roi [ delete: no action, update: no action ]
+}
+
+Ref fk_ROIs_id_ROI_CarModel_Map {
+	ROIs.id < ROI_CarModel_Map.id_roi [ delete: no action, update: no action ]
+}
+
+Ref fk_Car_Models_id_ROI_CarModel_Map {
+	Car_Models.id < ROI_CarModel_Map.id_car_model [ delete: no action, update: no action ]
+}
+
+Ref fk_Solutions_id_Project_Work_Log {
+	Solutions.id < Project_Work_Log.id_solution [ delete: no action, update: no action ]
+}
+
+Ref fk_Solutions_id_Technical_Change_Log {
+	Solutions.id < Technical_Change_Log.id_solution [ delete: no action, update: no action ]
+}
+
+Ref fk_Contacts_External_id_supplier_Suppliers {
+	Contacts_External.id_supplier > Suppliers.id [ delete: no action, update: no action ]
+}
+
+Ref fk_List_Types_ROI_id_roi_ROIs {
+	List_Types_ROI.id_roi > ROIs.id [ delete: no action, update: no action ]
+}
+
+Ref fk_Suppliers_id_Solutions {
+	Suppliers.id < Solutions.id_supplier [ delete: no action, update: no action ]
+}
