@@ -49,7 +49,7 @@ Table Technical_Change_Log [headercolor: #175e7a] {
 Table Cameras [headercolor: #13fa02] {
 	id integer [ pk, unique ]
 	id_solution integer
-	manufacturer nvarchar(255)
+	id_manufacturer integer
 	model nvarchar(255)
 	type nvarchar(100)
 	interface nvarchar(50)
@@ -63,7 +63,7 @@ Table Cameras [headercolor: #13fa02] {
 Table Lenses [headercolor: #21f205] {
 	id integer [ pk, unique ]
 	id_camera integer
-	manufacturer nvarchar(255)
+	id_manufacturer integer
 	model nvarchar(255)
 	focal_length decimal(10,2)
 	aperture nvarchar(10)
@@ -121,7 +121,9 @@ Table ROI_CarModel_Map [headercolor: #01877e] {
 Table Suppliers [headercolor: #0a0af2] {
 	id integer [ pk, increment, not null, unique ]
 	name nvarchar(255)
+	manufacturer bit
 	website nvarchar(255)
+	address text(65535)
 }
 
 Table Contacts_External [headercolor: #0707ed] {
@@ -197,4 +199,12 @@ Ref fk_List_Types_ROI_id_roi_ROIs {
 
 Ref fk_Suppliers_id_Solutions {
 	Suppliers.id < Solutions.id_supplier [ delete: no action, update: no action ]
+}
+
+Ref fk_Suppliers_id_Cameras {
+	Suppliers.id < Cameras.id_manufacturer [ delete: no action, update: no action ]
+}
+
+Ref fk_Suppliers_id_Lenses {
+	Suppliers.id < Lenses.id_manufacturer [ delete: no action, update: no action ]
 }
