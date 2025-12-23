@@ -1,6 +1,6 @@
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:146.0) Gecko/20100101 Firefox/146.0" version="29.2.7">
   <diagram name="Page-1" id="gRoJ1zCIvds9LI2MvUHC">
-    <mxGraphModel dx="2112" dy="813" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="1760" dy="678" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -45,10 +45,10 @@
         <mxCell id="g-TTeUrGek6l8Tv3b6Lh-6" edge="1" parent="1" source="g-TTeUrGek6l8Tv3b6Lh-5" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;curved=0;sketch=1;curveFitting=1;jiggle=2;shadow=1;strokeColor=light-dark(#000000,#FF9164);" target="9LFJ8alPbCXZHIgiIzVX-11">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="g-TTeUrGek6l8Tv3b6Lh-7" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;rounded=0;fontSize=24;" value="WireGuard VPN - Local Homelab" vertex="1">
-          <mxGeometry height="30" width="440" x="40" y="40" as="geometry" />
+        <mxCell id="g-TTeUrGek6l8Tv3b6Lh-7" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;rounded=0;fontSize=16;" value="WireGuard VPN - Local Homelab" vertex="1">
+          <mxGeometry height="40" width="440" x="40" y="40" as="geometry" />
         </mxCell>
-        <mxCell id="g-TTeUrGek6l8Tv3b6Lh-8" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;rounded=0;fontSize=16;labelPosition=center;verticalLabelPosition=middle;" value="LAN Subnet: 172.16.100.0 / 24&lt;br&gt;VPN Subnet: 10.7.0.0 / 24" vertex="1">
+        <mxCell id="g-TTeUrGek6l8Tv3b6Lh-8" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;rounded=0;fontSize=12;labelPosition=center;verticalLabelPosition=middle;" value="LAN Subnet: 172.16.100.0 / 24&lt;br&gt;VPN Subnet: 10.7.0.0 / 24" vertex="1">
           <mxGeometry height="40" width="440" x="40" y="80" as="geometry" />
         </mxCell>
       </root>
