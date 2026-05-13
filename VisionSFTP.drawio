@@ -1,6 +1,6 @@
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36" pages="4">
   <diagram name="Architektura" id="BgG-i6gUp6LdUnzvDqna">
-    <mxGraphModel dx="1333" dy="712" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="1706" dy="1291" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -145,7 +145,7 @@
         </mxCell>
         <mxCell id="2sMSwCCo7ZyNy4tqBmBp-28" collapsed="1" parent="1" style="swimlane;startSize=0;rounded=0;" value="" vertex="1">
           <mxGeometry height="40" width="50" x="40" y="560" as="geometry">
-            <mxRectangle height="289.96" width="575" x="80" y="600" as="alternateBounds" />
+            <mxRectangle height="289.96" width="575" x="40" y="560" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
         <mxCell id="2sMSwCCo7ZyNy4tqBmBp-14" edge="1" parent="2sMSwCCo7ZyNy4tqBmBp-28" source="2sMSwCCo7ZyNy4tqBmBp-15" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;curved=0;sketch=1;curveFitting=1;jiggle=2;shadow=1;endArrow=classic;endFill=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;strokeColor=#666666;entryPerimeter=0;" target="2sMSwCCo7ZyNy4tqBmBp-17">
